@@ -14,11 +14,15 @@ namespace DoodleJump
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            //Changing Resolution
+            _graphics.PreferredBackBufferWidth = 900;
+            _graphics.PreferredBackBufferHeight = 1600;
+            _graphics.ApplyChanges();
 
             base.Initialize();
         }
@@ -42,7 +46,7 @@ namespace DoodleJump
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
 
