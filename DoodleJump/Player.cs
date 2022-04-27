@@ -9,8 +9,17 @@ namespace DoodleJump
 {
     class Player
     {
-        private Vector2 Velocity = new Vector2(0, 0);
-        
+        public Vector2 Velocity = new Vector2(0, 0);
+        public Vector2 Position = new Vector2(0, 0);
+        public Rectangle boundingBox = new Rectangle();
+
+        public void drawBoundingBox()
+        {
+            boundingBox.X = (int)(float)Position.X;
+            boundingBox.Y = (int)(float)Position.Y;
+        }
+
+
 
     }
 }
