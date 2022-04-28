@@ -11,8 +11,8 @@ namespace DoodleJump
     {
         public Vector2 Velocity = new Vector2(0, 0);
         public Vector2 Position = new Vector2(0, 0);
-        public Rectangle boundingBox = new Rectangle();
-
+        public Rectangle boundingBox = new Rectangle(0, 0, 145, 35);
+        
         public void drawBoundingBox()
         {
             boundingBox.X = (int)(float)Position.X;
