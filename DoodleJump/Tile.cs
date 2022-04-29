@@ -9,12 +9,13 @@ namespace DoodleJump
 {
     class Tile
     {
-      
+
+
         public Vector2 Position;
         public Rectangle boundingBox = new Rectangle();
-        public String tileType;
+        public int tileType;
 
-        public Tile(Vector2 Pos, String TileType)
+        public Tile(Vector2 Pos, int TileType)
         {
             tileType = TileType;
             Position = Pos;
@@ -22,5 +23,13 @@ namespace DoodleJump
             boundingBox.Y = (int)Pos.Y;
         }
 
+        public void Update()
+        { 
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            
+        }
     }
 }
