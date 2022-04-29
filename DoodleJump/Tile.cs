@@ -10,26 +10,25 @@ namespace DoodleJump
     class Tile
     {
 
-
+        Texture2D image;
         public Vector2 Position;
-        public Rectangle boundingBox = new Rectangle();
-        public int tileType;
+        public Rectangle BoundingBox = new Rectangle();
+        public int TileType;
 
-        public Tile(Vector2 Pos, int TileType)
+        public Tile(Vector2 Pos, int tileType, Texture2D imageP)
         {
-            tileType = TileType;
+            image = imageP;
+            TileType = tileType;
             Position = Pos;
-            boundingBox.X = (int)Pos.X;
-            boundingBox.Y = (int)Pos.Y;
-        }
-
-        public void Update()
-        { 
+            BoundingBox.X = (int)Pos.X;
+            BoundingBox.Y = (int)Pos.Y;
+            BoundingBox.Width = image.Width;
+            BoundingBox.Height = image.Height;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            
+            spriteBatch.Draw(image, BoundingBox, Color.White);
         }
     }
 }

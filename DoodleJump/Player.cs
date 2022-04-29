@@ -14,7 +14,7 @@ namespace DoodleJump
         Color tint;
 
         public Vector2 velocity = new Vector2(0, 0);
-        public Rectangle boundingBox => new Rectangle((int)position.X, (int)position.Y, image.Width, image.Height);
+        public Rectangle boundingBox => new Rectangle((int)position.X - 55, (int)position.Y, image.Width/2, image.Height/4);
 
         SpriteEffects direction;
 
@@ -31,18 +31,22 @@ namespace DoodleJump
             //Update Keyboard State
             KeyboardState keyboardState = Keyboard.GetState();
 
-            //Player Position Update
+            //Player Position/Velocity Update
             velocity.Y += 1;
             position.X += velocity.X;
             position.Y += velocity.Y;
 
-            if (velocity.X >= 2)
+            if (velocity.X >= 1)
             {
                 velocity.X -= 0.8f;
             }
-            else if (velocity.X <= 2)
+            else if (velocity.X <= -1)
             {
                 velocity.X += 0.8f;
+            }
+            else
+            {
+                velocity.X = 0;
             }
 
             //Floor
@@ -72,13 +76,15 @@ namespace DoodleJump
                 }
             }
 
-            if (position.X > Game1._graphics.PreferredBackBufferWidth)
+
+            //Spill Over
+            if (position.X > Game1._graphics.PreferredBackBufferWidth + 55)
             {
-                position.X = -145;
+                position.X = -60;
             }
-            else if (position.X < -145)
+            else if (position.X < -60)
             {
-                position.X = Game1._graphics.PreferredBackBufferWidth;
+                position.X = Game1._graphics.PreferredBackBufferWidth + 55;
             }
 
         }

@@ -13,9 +13,14 @@ namespace DoodleJump
         private Player player;
 
         Texture2D Doodler;
-        Texture2D pixel;
-
-        KeyboardState keyboardState;
+        Texture2D tile_green;
+        Texture2D tile_blue;
+        Texture2D tile_dark_blue;
+        Texture2D tile_white;
+        Texture2D tile_broken_1;
+        Texture2D tile_broken_2;
+        Texture2D tile_broken_3;
+        Texture2D tile_broken_4;
 
         public Game1()
         {
@@ -38,9 +43,20 @@ namespace DoodleJump
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            //Load Player Sprite
             Doodler = this.Content.Load<Texture2D>("Doodler");
-            pixel = this.Content.Load<Texture2D>("pixel");
 
+            //Load Tiles
+            tile_green = this.Content.Load<Texture2D>("tile_normal");
+            tile_blue = this.Content.Load<Texture2D>("tile_blue");
+            tile_dark_blue = this.Content.Load<Texture2D>("tile_dark_blue");
+            tile_white = this.Content.Load<Texture2D>("tile_white");
+            tile_broken_1 = this.Content.Load<Texture2D>("tile_broken_1");
+            tile_broken_2 = this.Content.Load<Texture2D>("tile_broken_2");
+            tile_broken_3 = this.Content.Load<Texture2D>("tile_broken_3");
+            tile_broken_4 = this.Content.Load<Texture2D>("tile_broken_4");
+
+            //Start Player Instance
             player = new Player(Doodler, new Vector2(0), Color.White);
         }
 
@@ -66,7 +82,6 @@ namespace DoodleJump
             _spriteBatch.Begin();
 
             player.Draw(_spriteBatch);
-            _spriteBatch.Draw(pixel, player.boundingBox, Color.Red);
 
             _spriteBatch.End();
 
