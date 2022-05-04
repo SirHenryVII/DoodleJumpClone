@@ -10,7 +10,7 @@ namespace DoodleJump
     class Player
     {
         Texture2D image;
-        Vector2 position;
+        public Vector2 position;
         Color tint;
 
         public Vector2 velocity = new Vector2(0, 0);
@@ -78,13 +78,34 @@ namespace DoodleJump
 
 
             //Spill Over
-            if (position.X > Game1._graphics.PreferredBackBufferWidth + 55)
+            if (position.X > Game1._graphics.PreferredBackBufferWidth + 65)
             {
-                position.X = -60;
+                position.X = -70;
             }
-            else if (position.X < -60)
+            else if (position.X < -70)
             {
-                position.X = Game1._graphics.PreferredBackBufferWidth + 55;
+                position.X = Game1._graphics.PreferredBackBufferWidth + 65;
+            }
+
+            //Tile Collisions
+            Tile TileToRemove = null;
+            foreach(Tile tile in Tile.TileList)
+            {
+                if(boundingBox.Intersects(tile.BoundingBox) && velocity.Y >= 0)
+                {
+                    velocity.Y = -35;
+
+                    if(tile.TileType == 4)
+                    {
+                        TileToRemove = tile;
+                    }
+
+                }
+            }
+
+            if(TileToRemove != null)
+            {
+                Tile.TileList.Remove(TileToRemove);
             }
 
         }
@@ -92,6 +113,15 @@ namespace DoodleJump
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(image, position, null, Color.White, 0f, new Vector2(image.Width/2, image.Height/2), new Vector2(0.6f, 0.6f), direction, 0f);
+        }
+
+        public void GameOver(Camera camera)
+        {
+            Tile.TileList.Clear();
+            position = new Vector2(Game1._graphics.PreferredBackBufferWidth / 2, Game1._graphics.PreferredBackBufferHeight + 10);
+            velocity = new Vector2(0, 0);
+            camera.cameraPos = new Vector2(0, 0);
+            Tile.Innit();
         }
 
     }

@@ -12,15 +12,17 @@ namespace DoodleJump
 
         private Player player;
 
+        Camera camera;
+
         Texture2D Doodler;
-        Texture2D tile_green;
-        Texture2D tile_blue;
-        Texture2D tile_dark_blue;
-        Texture2D tile_white;
-        Texture2D tile_broken_1;
-        Texture2D tile_broken_2;
-        Texture2D tile_broken_3;
-        Texture2D tile_broken_4;
+        public static Texture2D tile_green;
+        public static Texture2D tile_blue;
+        public static Texture2D tile_dark_blue;
+        public static Texture2D tile_white;
+        public static Texture2D tile_broken_1;
+        public static Texture2D tile_broken_2;
+        public static Texture2D tile_broken_3;
+        public static Texture2D tile_broken_4;
 
         public Game1()
         {
@@ -35,6 +37,9 @@ namespace DoodleJump
             _graphics.PreferredBackBufferWidth = 900;
             _graphics.PreferredBackBufferHeight = 1600;
             _graphics.ApplyChanges();
+
+            //Innit Camera
+            camera = new Camera(GraphicsDevice.Viewport);
 
             base.Initialize();
         }
@@ -56,8 +61,11 @@ namespace DoodleJump
             tile_broken_3 = this.Content.Load<Texture2D>("tile_broken_3");
             tile_broken_4 = this.Content.Load<Texture2D>("tile_broken_4");
 
-            //Start Player Instance
-            player = new Player(Doodler, new Vector2(0), Color.White);
+            //Innit Player
+            player = new Player(Doodler, new Vector2(_graphics.PreferredBackBufferWidth/2, _graphics.PreferredBackBufferHeight + 10), Color.White);
+
+            //Innit Tiles
+            Tile.Innit();
         }
 
         protected override void Update(GameTime gameTime)
@@ -65,12 +73,25 @@ namespace DoodleJump
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            //Tile Collision
-            //if collide with tile and velocity is poisitive
-            //add 35 to y velocity
+            //Game Over Logic
+            if(player.position.Y > camera.cameraPos.Y + _graphics.PreferredBackBufferHeight + 200)
+            {
+                player.GameOver(camera);
+            }
 
+            //Camera Logic (I am putting it here instead of the Camera Class as I plan
+            //to re-use the Camera Class for Future Projects)
+            if(player.position.Y < camera.cameraPos.Y + _graphics.PreferredBackBufferHeight/2)
+            {
+                camera.setPos(new Vector2(0, player.position.Y - _graphics.PreferredBackBufferHeight/2));
+            }
+            else
+            {
+                camera.setPos(camera.cameraPos);
+            }
+
+            Tile.Update(camera);
             player.Update();
-
 
             base.Update(gameTime);
         }
@@ -79,8 +100,11 @@ namespace DoodleJump
         {
             GraphicsDevice.Clear(Color.White);
 
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(SpriteSortMode.Deferred,
+                BlendState.AlphaBlend,
+                null, null, null, null, camera.transform);
 
+            Tile.Draw(_spriteBatch);
             player.Draw(_spriteBatch);
 
             _spriteBatch.End();
