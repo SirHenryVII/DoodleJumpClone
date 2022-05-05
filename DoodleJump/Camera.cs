@@ -15,7 +15,7 @@ namespace DoodleJump
 
         public Camera(Viewport newView)
         {
-            cameraPos = new Vector2(0, 0);
+            cameraPos = new Vector2(0);
             view = newView;
         }
 

@@ -14,6 +14,8 @@ namespace DoodleJump
 
         Camera camera;
 
+        public static int Score = 0;
+
         Texture2D Doodler;
         public static Texture2D tile_green;
         public static Texture2D tile_blue;
@@ -23,6 +25,8 @@ namespace DoodleJump
         public static Texture2D tile_broken_2;
         public static Texture2D tile_broken_3;
         public static Texture2D tile_broken_4;
+        Texture2D background;
+        SpriteFont spritefont;
 
         public Game1()
         {
@@ -35,7 +39,7 @@ namespace DoodleJump
         {
             //Changing Resolution
             _graphics.PreferredBackBufferWidth = 900;
-            _graphics.PreferredBackBufferHeight = 1600;
+            _graphics.PreferredBackBufferHeight = 1300;
             _graphics.ApplyChanges();
 
             //Innit Camera
@@ -60,6 +64,8 @@ namespace DoodleJump
             tile_broken_2 = this.Content.Load<Texture2D>("tile_broken_2");
             tile_broken_3 = this.Content.Load<Texture2D>("tile_broken_3");
             tile_broken_4 = this.Content.Load<Texture2D>("tile_broken_4");
+            background = this.Content.Load<Texture2D>("sky");
+            spritefont = this.Content.Load<SpriteFont>("galleryFont");
 
             //Innit Player
             player = new Player(Doodler, new Vector2(_graphics.PreferredBackBufferWidth/2, _graphics.PreferredBackBufferHeight + 10), Color.White);
@@ -90,6 +96,13 @@ namespace DoodleJump
                 camera.setPos(camera.cameraPos);
             }
 
+            //Update Score
+            if(Score < System.Math.Abs(player.position.Y - _graphics.PreferredBackBufferHeight))
+            {
+                Score = (int)System.Math.Abs(player.position.Y - _graphics.PreferredBackBufferHeight);
+            }
+
+            //Update Tiles and Player
             Tile.Update(camera);
             player.Update();
 
@@ -104,8 +117,15 @@ namespace DoodleJump
                 BlendState.AlphaBlend,
                 null, null, null, null, camera.transform);
 
+            //Draw Background
+            _spriteBatch.Draw(background, camera.cameraPos, null, Color.White, 0f, new Vector2(0), new Vector2(1.5f, 1.5f), SpriteEffects.None, 0f);
+
+            //Draw Tiles and Player
             Tile.Draw(_spriteBatch);
             player.Draw(_spriteBatch);
+
+            //Draw Score
+            _spriteBatch.DrawString(spritefont, "Score: " + Score, camera.cameraPos, Color.Black);
 
             _spriteBatch.End();
 

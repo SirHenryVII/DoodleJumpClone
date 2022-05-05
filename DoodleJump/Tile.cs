@@ -37,7 +37,7 @@ namespace DoodleJump
             //Generate Initial Tiles
             for(int i = Game1._graphics.PreferredBackBufferHeight - 350; i > 0; i -= 350)
             {
-                TileList.Add(new Tile(new Vector2(random.Next(20, 880), i), 1, Game1.tile_green));
+                TileList.Add(new Tile(new Vector2(random.Next(0, Game1._graphics.PreferredBackBufferWidth - Game1.tile_green.Width - 3), i), 1, Game1.tile_green));
             }
         }
 
@@ -86,7 +86,7 @@ namespace DoodleJump
                     
                 }
 
-                TileList.Add(new Tile(new Vector2(random.Next(20, 880), camera.cameraPos.Y - 20), tempTileNum, tempTile));
+                TileList.Add(new Tile(new Vector2(random.Next(0, Game1._graphics.PreferredBackBufferWidth - Game1.tile_blue.Width - 3), camera.cameraPos.Y - 20), tempTileNum, tempTile));
             }
 
             //Tile Events

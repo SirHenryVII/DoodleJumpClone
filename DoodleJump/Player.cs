@@ -121,6 +121,7 @@ namespace DoodleJump
             position = new Vector2(Game1._graphics.PreferredBackBufferWidth / 2, Game1._graphics.PreferredBackBufferHeight + 10);
             velocity = new Vector2(0, 0);
             camera.cameraPos = new Vector2(0, 0);
+            Game1.Score = 0;
             Tile.Innit();
         }
 
