@@ -16,7 +16,7 @@ namespace DoodleJump
 
         public static int Score = 0;
 
-        Texture2D Doodler;
+        public static Texture2D Doodler;
         public static Texture2D tile_green;
         public static Texture2D tile_blue;
         public static Texture2D tile_dark_blue;
@@ -25,6 +25,7 @@ namespace DoodleJump
         public static Texture2D tile_broken_2;
         public static Texture2D tile_broken_3;
         public static Texture2D tile_broken_4;
+        public static Texture2D biden;
         Texture2D background;
         SpriteFont spritefont;
 
@@ -65,10 +66,11 @@ namespace DoodleJump
             tile_broken_3 = this.Content.Load<Texture2D>("tile_broken_3");
             tile_broken_4 = this.Content.Load<Texture2D>("tile_broken_4");
             background = this.Content.Load<Texture2D>("sky");
+            biden = this.Content.Load<Texture2D>("560-5606161_joe-biden-head-hd-png-download-removebg-preview");
             spritefont = this.Content.Load<SpriteFont>("galleryFont");
 
             //Innit Player
-            player = new Player(Doodler, new Vector2(_graphics.PreferredBackBufferWidth/2, _graphics.PreferredBackBufferHeight + 10), Color.White);
+            player = new Player(new Vector2(_graphics.PreferredBackBufferWidth/2, _graphics.PreferredBackBufferHeight + 10), Color.White);
 
             //Innit Tiles
             Tile.Innit();

@@ -17,12 +17,13 @@ namespace DoodleJump
         public Rectangle boundingBox => new Rectangle((int)position.X - 55, (int)position.Y, image.Width/2, image.Height/4);
 
         SpriteEffects direction;
+        Texture2D playerSprite;
 
-        public Player(Texture2D Image, Vector2 Position, Color Tint)
+        public Player(Vector2 Position, Color Tint)
         {
-            image = Image;
             position = Position;
             tint = Tint;
+            playerSprite = Game1.Doodler;
         }
 
         public void Update()
@@ -65,6 +66,12 @@ namespace DoodleJump
                     velocity.X += (float)(1.4);
                     direction = SpriteEffects.None;
                 }
+            }
+
+            //BIDEN MODE
+            if (keyboardState.IsKeyDown(Keys.LeftControl) && keyboardState.IsKeyDown(Keys.B))
+            {
+                playerSprite = Game1.biden;
             }
 
             if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A))
@@ -112,7 +119,7 @@ namespace DoodleJump
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(image, position, null, Color.White, 0f, new Vector2(image.Width/2, image.Height/2), new Vector2(0.4f, 0.4f), direction, 0f);
+            spriteBatch.Draw(playerSprite, position, null, Color.White, 0f, new Vector2(image.Width/2, image.Height/2), new Vector2(0.4f, 0.4f), direction, 0f);
         }
 
         public void GameOver(Camera camera)
