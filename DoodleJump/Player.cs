@@ -32,17 +32,17 @@ namespace DoodleJump
             KeyboardState keyboardState = Keyboard.GetState();
 
             //Player Position/Velocity Update
-            velocity.Y += 1;
+            velocity.Y += 0.7f;
             position.X += velocity.X;
             position.Y += velocity.Y;
 
             if (velocity.X >= 1)
             {
-                velocity.X -= 0.8f;
+                velocity.X -= 0.6f;
             }
             else if (velocity.X <= -1)
             {
-                velocity.X += 0.8f;
+                velocity.X += 0.6f;
             }
             else
             {
@@ -52,17 +52,17 @@ namespace DoodleJump
             //Floor
             if (position.Y > Game1._graphics.PreferredBackBufferHeight)
             {
-                velocity.Y = -35;
+                velocity.Y = -23;
             }
 
 
             //Player Input
-            int maxSpeed = 40;
+            int maxSpeed = 20;
             if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D))
             {
                 if (velocity.X > -maxSpeed && velocity.X < maxSpeed)
                 {
-                    velocity.X += 2;
+                    velocity.X += (float)(1.4);
                     direction = SpriteEffects.None;
                 }
             }
@@ -71,7 +71,7 @@ namespace DoodleJump
             {
                 if (velocity.X > -maxSpeed && velocity.X < maxSpeed)
                 {
-                    velocity.X -= 2;
+                    velocity.X -= (float)(1.4);
                     direction = SpriteEffects.FlipHorizontally;
                 }
             }
@@ -93,7 +93,7 @@ namespace DoodleJump
             {
                 if(boundingBox.Intersects(tile.BoundingBox) && velocity.Y >= 0)
                 {
-                    velocity.Y = -35;
+                    velocity.Y = -23;
 
                     if(tile.TileType == 4)
                     {
@@ -112,7 +112,7 @@ namespace DoodleJump
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(image, position, null, Color.White, 0f, new Vector2(image.Width/2, image.Height/2), new Vector2(0.6f, 0.6f), direction, 0f);
+            spriteBatch.Draw(image, position, null, Color.White, 0f, new Vector2(image.Width/2, image.Height/2), new Vector2(0.4f, 0.4f), direction, 0f);
         }
 
         public void GameOver(Camera camera)

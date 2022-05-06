@@ -38,8 +38,8 @@ namespace DoodleJump
         protected override void Initialize()
         {
             //Changing Resolution
-            _graphics.PreferredBackBufferWidth = 900;
-            _graphics.PreferredBackBufferHeight = 1300;
+            _graphics.PreferredBackBufferWidth = 570;
+            _graphics.PreferredBackBufferHeight = 1000;
             _graphics.ApplyChanges();
 
             //Innit Camera
@@ -87,9 +87,9 @@ namespace DoodleJump
 
             //Camera Logic (I am putting it here instead of the Camera Class as I plan
             //to re-use the Camera Class for Future Projects)
-            if(player.position.Y < camera.cameraPos.Y + _graphics.PreferredBackBufferHeight/2)
+            if(player.position.Y < camera.cameraPos.Y + _graphics.PreferredBackBufferHeight/2.2f)
             {
-                camera.setPos(new Vector2(0, player.position.Y - _graphics.PreferredBackBufferHeight/2));
+                camera.setPos(new Vector2(0, player.position.Y - _graphics.PreferredBackBufferHeight/2.2f));
             }
             else
             {
@@ -118,7 +118,7 @@ namespace DoodleJump
                 null, null, null, null, camera.transform);
 
             //Draw Background
-            _spriteBatch.Draw(background, camera.cameraPos, null, Color.White, 0f, new Vector2(0), new Vector2(1.5f, 1.5f), SpriteEffects.None, 0f);
+            _spriteBatch.Draw(background, camera.cameraPos, null, Color.White, 0f, new Vector2(0), new Vector2(.9f, .9f), SpriteEffects.None, 0f);
 
             //Draw Tiles and Player
             Tile.Draw(_spriteBatch);

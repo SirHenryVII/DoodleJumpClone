@@ -28,14 +28,14 @@ namespace DoodleJump
             TileType = tileType;
             BoundingBox.X = (int)Pos.X;
             BoundingBox.Y = (int)Pos.Y;
-            BoundingBox.Width = image.Width;
-            BoundingBox.Height = image.Height;
+            BoundingBox.Width = (int)(image.Width / 1.7);
+            BoundingBox.Height = (int)(image.Height / 1.7);
         }
 
         public static void Innit()
         {
             //Generate Initial Tiles
-            for(int i = Game1._graphics.PreferredBackBufferHeight - 350; i > 0; i -= 350)
+            for(int i = Game1._graphics.PreferredBackBufferHeight - 250; i > 0; i -= 250)
             {
                 TileList.Add(new Tile(new Vector2(random.Next(0, Game1._graphics.PreferredBackBufferWidth - Game1.tile_green.Width - 3), i), 1, Game1.tile_green));
             }
@@ -59,7 +59,7 @@ namespace DoodleJump
             }
 
             //Spawn Tiles
-            if (TileList[TileList.Count - 1].BoundingBox.Y > camera.cameraPos.Y + 350)
+            if (TileList[TileList.Count - 1].BoundingBox.Y > camera.cameraPos.Y + 250)
             {
                 int tempTileNum = random.Next(0, 5);
                 Texture2D tempTile = Game1.tile_green;
