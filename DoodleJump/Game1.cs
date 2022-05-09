@@ -82,16 +82,16 @@ namespace DoodleJump
                 Exit();
 
             //Game Over Logic
-            if(player.position.Y > camera.cameraPos.Y + _graphics.PreferredBackBufferHeight + 200)
+            if(player.boundingBox.Y > camera.cameraPos.Y + _graphics.PreferredBackBufferHeight + 200)
             {
                 player.GameOver(camera);
             }
 
             //Camera Logic (I am putting it here instead of the Camera Class as I plan
             //to re-use the Camera Class for Future Projects)
-            if(player.position.Y < camera.cameraPos.Y + _graphics.PreferredBackBufferHeight/2.2f)
+            if(player.boundingBox.Y < camera.cameraPos.Y + _graphics.PreferredBackBufferHeight/2.2f)
             {
-                camera.setPos(new Vector2(0, player.position.Y - _graphics.PreferredBackBufferHeight/2.2f));
+                camera.setPos(new Vector2(0, player.boundingBox.Y - _graphics.PreferredBackBufferHeight/2.2f));
             }
             else
             {
@@ -99,9 +99,9 @@ namespace DoodleJump
             }
 
             //Update Score
-            if(Score < System.Math.Abs(player.position.Y - _graphics.PreferredBackBufferHeight))
+            if(Score < System.Math.Abs(player.boundingBox.Y - _graphics.PreferredBackBufferHeight))
             {
-                Score = (int)System.Math.Abs(player.position.Y - _graphics.PreferredBackBufferHeight);
+                Score = (int)System.Math.Abs(player.boundingBox.Y - _graphics.PreferredBackBufferHeight);
             }
 
             //Update Tiles and Player
