@@ -22,8 +22,8 @@ namespace DoodleJump
             playerSprite = Game1.Doodler;
             boundingBox.X = (int)Position.X;
             boundingBox.Y = (int)Position.Y;
-            boundingBox.Width = (int)playerSprite.Width/2;
-            boundingBox.Height = (int)playerSprite.Height/2;
+            boundingBox.Width = (int)(playerSprite.Width/2.7f);
+            boundingBox.Height = (int)(playerSprite.Height/2.7f);
             tint = Tint;
         }
 
@@ -52,9 +52,9 @@ namespace DoodleJump
             }
 
             //Floor
-            if (boundingBox.Y > Game1._graphics.PreferredBackBufferHeight)
+            if (boundingBox.Y + boundingBox.Width > Game1._graphics.PreferredBackBufferHeight)
             {
-                velocity.Y = -23;
+                velocity.Y = -24;
             }
 
 
@@ -101,9 +101,9 @@ namespace DoodleJump
             Tile TileToRemove = null;
             foreach(Tile tile in Tile.TileList)
             {
-                if(new Rectangle(boundingBox.X, boundingBox.Y, boundingBox.Width, 10).Intersects(tile.BoundingBox) && velocity.Y >= 0)
+                if(new Rectangle(boundingBox.X, boundingBox.Y + boundingBox.Height - 10, boundingBox.Width, 10).Intersects(tile.BoundingBox) && velocity.Y >= 0)
                 {
-                    velocity.Y = -23;
+                    velocity.Y = -24;
 
                     if(tile.TileType == 4)
                     {

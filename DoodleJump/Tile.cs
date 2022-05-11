@@ -9,12 +9,6 @@ namespace DoodleJump
 {
     class Tile
     {
-
-        //TileTypes:
-        //1 = Green
-        //2 = Blue
-        //
-
         public bool Left = true;
         public Texture2D image;
         public Rectangle BoundingBox = new Rectangle();
@@ -114,7 +108,7 @@ namespace DoodleJump
                         }
                         else
                         {
-                            if (tile.BoundingBox.X < Game1._graphics.PreferredBackBufferWidth - tile.image.Width - 3)
+                            if (tile.BoundingBox.X < Game1._graphics.PreferredBackBufferWidth - tile.image.Width)
                             {
                                 tile.BoundingBox.X += 3;
                             }
